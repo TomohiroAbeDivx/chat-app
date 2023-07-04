@@ -11,36 +11,59 @@ Things you may want to cover:
 
 * Configuration
 
-* Database creation
-
-## users テーブル
-
+# Database creation
+## users
+### Column
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | name               | string | null: false |
 | email              | string | null: false |
 | encrypted_password | string | null: false |
 
-## rooms テーブル
+### Association
 
+- has_many :room_users
+- has_many :rooms, through: :room_users
+- has_many :messages
+
+## rooms
+### Column
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
 | name   | string | null: false |
 
-## room_users テーブル
+### Association
+
+- has_many :room_users
+- has_many :users, through: :room_users
+- has_many :messages
+
+## room_users
+### Column
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 | user   | references | null: false, foreign_key: true |
 | room   | references | null: false, foreign_key: true |
 
-## messages テーブル
+### Association
+
+- belongs_to :room
+- belongs_to :user
+
+## messages
+### Column
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
 | content | string     |                                |
 | user    | references | null: false, foreign_key: true |
 | room    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :room
+- belongs_to :user
 
 * Database initialization
 
