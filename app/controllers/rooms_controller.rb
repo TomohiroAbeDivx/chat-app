@@ -1,5 +1,7 @@
 class RoomsController < ApplicationController
     def index
+      @message = Message.new
+      @room = Room.find(params[:id])
     end
     
     def new
